@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div th:replace="~{fragmentos/header :: header}"></div>
+
+    <div style="margin: 1rem">
+      <div
+        th:if="${personas != null and !personas.isEmpty()}"
+        class="container-fluid"
+      >
+        <form method="get" th:action="@{/historial}">
+          <div class="row">
+            <div class="col-1"><label for="personas">Persona:</label></div>
+            <div class="col-1">
+              <select name="persona" id="personas">
+                <option th:each="p : ${personas}" th:value="${p.id}">
+                  [[${p.id}]]
+                </option>
+              </select>
+            </div>
+            <div class="col-1"><input type="submit" value="Enviar" /></div>
+          </div>
+        </form>
+      </div>
+
+      <div
+        th:if="${mascotas != null and !mascotas.isEmpty()}"
+        class="container-fluid"
+      >
+        <form method="get" th:action="@{/historial}">
+          <div class="row">
+            <input type="hidden" name="persona" th:value="${persona.id}" />
+            <div class="col-1"><label for="mascotas">Pacientes:</label></div>
+            <div class="col-1">
+              <select name="mascota" id="mascota">
+                <option th:each="m : ${mascotas}" th:value="${m.idMascota}">
+                  [[${m.nombre}]]
+                </option>
+              </select>
+            </div>
+            <div class="col-1">
+              <input type="submit" value="Enviar" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin: 1rem">
+      <h5>Información del dueño</h5>
+      <div th:if="${persona != null}">
+        <div th:replace="~{fragmentos/infoDueno :: infoDueno(${persona})}"></div>
+      </div>
+      <div th:if="${mascota != null}">
+        <h5>Paciente</h5>
+        <div>
+          <div th:replace="~{fragmentos/mascota :: mascota(${mascota})}"></div>
+        </div>
+      </div>
+    </div>
+
+    <div th:if="${persona != null} and ${mascota != null}" style="margin: 1rem">
+      <h5>Agregar nueva entrada</h5>
+      <form method="post" th:action="@{/historial}">
+        <div class="container-fluid">
+          <input type="hidden" th:value="${persona.id}" name="idPersona" />
+          <input
+            type="hidden"
+            th:value="${mascota.idMascota}"
+            name="idMascota"
+          />
+          <div class="row">
+            <div class="col-1"><label for="fecha">Fecha</label></div>
+            <div class="col"><input type="date" name="fecha" required/></div>
+          </div>
+          <div class="row">
+            <div class="row">
+              <label for="procedimientos">Procedimientos</label>
+            </div>
+            <div class="row">
+              <textarea name="procedimientos" id="procedimientos" required></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="row">
+              <label for="observaciones">Observaciones</label>
+            </div>
+            <div class="row">
+              <textarea name="observaciones" id="observaciones" required></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <label for="recordatorio">Recordatorio</label>
+            </div>
+            <div class="col">
+              <input type="date" name="recordatorio" id="recordatorio" />
+            </div>
+          </div>
+          <div>
+            <input type="submit" value="Guardar" />
+            <input type="reset" value="Limpiar" />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div
+      th:if="${historial} != null and ${historial.getEntradas() != null}"
+      style="margin: 1rem"
+    >
+      <h5>Historial</h5>
+      <div
+        th:each="entrada : ${historial.getEntradas()}"
+        class="container-fluid"
+        style="margin-top: 0.5rem"
+      >
+        <div>
+          <div th:replace="~{fragmentos/entrada :: entrada(${entrada})}"></div>
+        </div>
+      </div>
+    </div>
+
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+  </body>
+</html>

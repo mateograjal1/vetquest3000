@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div th:fragment="mascota(data)">
+      <div class="card" th:if="${data}">
+        <div class="card-header">
+          <h5 class="card-title">[[${data.nombre}]]</h5>
+          <h6 class="card-subtitle">
+            [[${data.especie}]], [[${data.raza}]]
+          </h6>
+        </div>
+        <p class="card-body">
+          <br />Color: [[${data.color}]] <br />Fecha nacimiento:
+          [[${data.fechaNacimiento}]]
+        </p>
+        <div class="card-footer">[[${data.idMascota}]]</div>
+      </div>
+    </div>
+  </body>
+</html>

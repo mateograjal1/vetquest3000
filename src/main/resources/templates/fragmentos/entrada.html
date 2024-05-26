@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div th:fragment="entrada(data)">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">[[${data.fecha}]]</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <h6 class="card-subtitle">Procedimientos</h6>
+            <p class="card-text">[[${data.procedimientos}]]</p>
+          </li>
+          <li class="list-group-item">
+            <h6 class="card-subtitle">Observaciones</h6>
+            <p class="card-text">[[${data.observaciones}]]</p>
+          </li>
+        </ul>
+        <div class="card-footer">
+          <h6 class="card-subtitle">Recordatorio</h6>
+          <p class="card-text">[[${data.recordatorio}]]</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

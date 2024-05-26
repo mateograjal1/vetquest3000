@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div th:fragment="infoDueno(data)">
+      <div class="card" th:if="${data}">
+        <div class="card-header">
+            <h5 class="card-title">
+              [[${data.nombre}]] [[${data.apellidos}]]
+            </h5>
+            <h6 class="card-subtitle">[[${data.id}]]</h6>
+          </div>
+          <p class="card-body">
+            Telefono: [[${data.telefono}]] <br />Email: [[${data.email}]]
+            <br />Direccion: [[${data.direccion}]]
+          </p>
+      </div>
+    </div>
+  </body>
+</html>

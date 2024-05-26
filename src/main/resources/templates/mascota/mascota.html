@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div th:replace="~{fragmentos/header :: header}"></div>
+
+    <div style="margin: 1rem" class="container-fluid">
+      <h5>Información del paciente</h5>
+      <form method="post" th:action="@{/mascota}" th:object="${mascota}">
+        <div class="row">
+          <div class="col-1"><label for="idMascota">Id</label></div>
+          <div class="col">
+            <input
+              type="text"
+              th:field="*{idMascota}"
+              id="idMascota"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="nombre">Nombre</label></div>
+          <div class="col">
+            <input type="text" th:field="*{nombre}" id="nombre" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="especie">Especie</label></div>
+          <div class="col">
+            <input type="text" th:field="*{especie}" id="especie" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="raza">Raza</label></div>
+          <div class="col">
+            <input type="text" th:field="*{raza}" id="raza" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="color">Color</label></div>
+          <div class="col">
+            <input type="text" th:field="*{color}" id="color" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1">
+            <label for="fecha">Fecha de nacimiento</label>
+          </div>
+          <div class="col">
+            <input type="date" th:field="*{fechaNacimiento}" id="fecha" required/>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <input type="submit" value="Guardar" />
+            <input type="reset" value="Limpiar" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr class="hr" style="margin: 1rem" />
+    <div
+      th:if="${mascotas != null and !mascotas.isEmpty()}"
+      style="margin: 1rem"
+      class="container-fluid"
+    >
+      <form method="get" th:action="@{/mascota}">
+        <div class="row">
+          <div class="col-1"><label for="mascotas">Pacientes:</label></div>
+          <div class="col">
+            <select name="mascotas" id="mascotas" >
+              <option
+                th:each="m : ${mascotas}"
+                th:value="${m.idMascota}"
+                th:text="${m.idMascota}"
+              ></option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="Enviar" />
+        </div>
+      </form>
+    </div>
+
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+  </body>
+</html>

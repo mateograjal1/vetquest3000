@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div th:replace="~{fragmentos/header :: header}"></div>
+
+    <div style="margin: 1rem;">
+      <h5>VetQuest 3000</h5>
+      <h6>Mateo Grajales Jaramillo</h6>
+      <h6>IUDigital</h6>
+      <h6>Proyecto Integrador I - PREICA2401B010077</h6>
+      <p>
+        La aplicación estará dirigida exclusivamente a veterinarios. Aunque la
+        aplicación está diseñada como una aplicación web que permitirá que
+        cualquiera pueda acceder, en esta primera versión se hará énfasis solo a
+        las necesidades del veterinario. En un desarrollo futuro se incluirá la
+        opción de que los dueños puedan ver la información de sus mascotas.
+      </p>
+      <p>
+        Los registros de clientes y mascotas se realizarán a nivel de cada
+        empresa veterinaria y serán privados, sin opción de compartir entre
+        empresas en esta etapa inicial. Esto es debido a que primero se debe
+        garantizar que los datos que se estén almacenando sean relevantes y se
+        valide la necesidad de almacenamiento de otros tipos de datos. En un
+        desarrollo futuro se incluirá la opción de que los datos de la mascota
+        se puedan compartir entre veterinarios de forma que cuando un
+        veterinario remita a otro lugar o el dueño de una mascota cambie de
+        veterinario se pueda migrar la información de forma ágil y rápida.
+      </p>
+      <p>
+        En esta primera iteración se hará una entrega de una prueba de concepto,
+        por lo cual aun no esta conectada a una base de datos y se tienen
+        funcionalidades básicas para realizar pruebas con usuarios con el
+        objetivo de encontrar los puntos fuertes y débiles de la propuesta.
+      </p>
+    </div>
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+  </body>
+</html>

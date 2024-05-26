@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head> </head>
+  <body>
+    <div th:replace="~{fragmentos/header :: header}"></div>
+
+    <div class="container-fluid" style="margin: 1rem">
+      <h5>Información del dueño</h5>
+      <form method="post" th:action="@{/persona/guardar}" th:object="${persona}">
+        <div class="row">
+          <div class="col-1"><label for="cedula">Cedula</label></div>
+          <div class="col">
+            <input type="text" th:field="*{id}" id="cedula" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="nombre">Nombre</label></div>
+          <div class="col">
+            <input type="text" th:field="*{nombre}" id="nombre" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="apellidos">Apellidos</label></div>
+          <div class="col">
+            <input
+              type="text"
+              th:field="*{apellidos}"
+              id="apellidos"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="telefono">Telefono</label></div>
+          <div class="col">
+            <input type="text" th:field="*{telefono}" id="telefono" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="email">Email</label></div>
+          <div class="col">
+            <input type="email" th:field="*{email}" id="email" required />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1"><label for="direccion">Direccion</label></div>
+          <div class="col">
+            <input type="text" th:field="*{direccion}" id="cedula" required />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <input type="submit" value="Guardar" />
+            <input type="reset" value="Limpiar" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr class="hr" style="margin: 1rem" />
+    <div
+      th:if="${personas != null and !personas.isEmpty()}"
+      style="margin: 1rem"
+      class="container-fluid"
+    >
+      <form method="get" th:action="@{/persona}">
+        <div class="row">
+          <div class="col-1"><label for="personas">Cedula</label></div>
+          <div class="col">
+            <select name="personas" id="personas">
+              <option th:each="p : ${personas}" th:value="${p.id}">
+                [[${p.id}]]
+              </option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <input type="submit" value="Enviar" />
+        </div>
+      </form>
+    </div>
+    <hr class="hr" style="margin: 1rem" />
+    <div th:if="${persona != null and persona.id != null}" style="margin: 1rem">
+      <div th:if="${persona.mascotas == null or persona.mascotas.isEmpty()}">
+        <div class="alert alert-warning" role="alert">
+          El usuario no tiene mascotas
+        </div>
+      </div>
+
+      <div
+        th:unless="${persona.mascotas == null or persona.mascotas.isEmpty()}"
+      >
+        <div th:each="mascotaP : ${mascotasPersona}">
+          <div th:replace="~{fragmentos/mascota :: mascota(${mascotaP})}"></div>
+        </div>
+      </div>
+      <hr class="hr" />
+      <div class="container-fluid">
+        <form method="post" th:action="@{/persona/agregarMascota}">
+          <div class="row">
+            <div class="col-1">
+              <label for="agregar">Asociar mascota:</label>
+            </div>
+            <input
+              type="hidden"
+              id="idPersona"
+              name="idPersona"
+              th:value="${persona.id}"
+            />
+            <div class="col">
+              <select name="agregar" id="agregar">
+                <option th:each="m : ${mascotas}" th:value="${m.idMascota}">
+                  [[${m.nombre}]]
+                </option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <input type="submit" value="Enviar" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr class="hr" style="margin: 1rem" />
+    <div th:replace="~{fragmentos/footer :: footer}"></div>
+  </body>
+</html>
